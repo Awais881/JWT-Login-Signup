@@ -1,0 +1,107 @@
+.h1{
+    position: absolute;
+    top: 10px;
+    right: 100px;
+    color: #333333;
+    font-size: 30px;
+    
+    
+    
+    
+    }
+    .contianer{
+        display: flex;
+        align-items: center;
+           
+    
+    }
+    
+    .field {
+        width: 450px;
+        height: 56px;
+        border-radius: 4px;
+        position: relative;
+        transition: 0.3s all;
+        padding: 10px;
+        outline: none;
+        border: none;
+        
+      }
+      .field:focus {
+        border: 1px solid blue;
+        border-radius: 8px;
+      
+    
+    
+     
+      } 
+      .check {
+       width: 17px;
+       /* background-color: #ffffff; */
+    
+      } 
+      .field::placeholder{
+       color: #999999;
+       font-size: 20px;
+      }
+      form{
+      position: relative;
+      left: 110px;
+      bottom: 120px;
+      }
+     .checkbox{
+        display: flex;
+       justify-content: flex-start;
+       color: #999999;
+     }
+     .submit{
+       background-color: #6675DF;
+       color: #ffffff;
+       width: 450px;
+        height: 56px;
+        border-radius: 12px;
+        border: none;
+    
+     }
+     .submit:hover{
+      background-color: #333333;
+      cursor: pointer;
+     }
+     .signup{
+        color: #999999;
+        font-size: 13px;
+     
+    position: relative;
+      left:  250px;
+     
+     }  
+     .twitter{
+        width: 50px;
+        position: relative;
+      left:  215px;
+      cursor: pointer;
+         
+     
+     }
+     .facebook{
+        width: 85px;
+        position: relative;
+      left:  236px;
+      cursor: pointer;
+         
+      
+     }
+     .facebook:hover{
+       background-color: #333333;
+     }
+    /* .social{
+       display: flex;
+       justify-content: center;
+       margin-right: 30px;
+     
+    } */
+    .forget{
+        margin-left: 200px;
+    color: #555555;
+    
+    }

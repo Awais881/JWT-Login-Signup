@@ -1,6 +1,9 @@
 import { useState } from "react";
 import axios from 'axios';
+import './signup.css';
+import 'react-toastify/dist/ReactToastify.css';
 
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const baseUrl = 'http://localhost:5001'
@@ -14,7 +17,37 @@ function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const signupHandler = async (e) => {
+        e.preventDefault();
 
+        try {
+            let response = await axios.post(`${baseUrl}/signup`, {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password
+            })
+
+            toast('Signup Succuesful ', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
+            console.log("signup successful");
+           
+
+        } catch (e) {
+            console.log("e: ", e);
+        }
+
+
+        // e.reset();
+    }
 
 
 
@@ -23,63 +56,48 @@ function Signup() {
 
     return (
 <>
-
-      <div class="form signup">
-                <span class="title">Registration</span>
-
-                <form  onsubmit="sign(); return false;">
-                    <div class="input-field">
-                        <input type="text" placeholder="Enter your name" required id="name"/>
-                        <i class="uil uil-user"></i>
-                    </div>
-                    <div class="input-field">
-                        <input type="email" placeholder="Enter your email" required id="email"/>
-                        <i class="uil uil-envelope icon"></i>
-                    </div>
-                    <div class="input-field">
-                        <input type="password" class="password" placeholder="Create a password" required id="password"/>
-                        <i class="uil uil-lock icon"></i>
-                    </div>
-                    <div class="input-field">
-                        <input type="password" class="password" placeholder="Confirm a password" required id="comPassword"/>
-                        <i class="uil uil-lock icon"></i>
-                        <i class="uil uil-eye-slash showHidePw"></i>
-                    </div>
-                    <div class="input-field">
-                        <input type="text" id="gender" placeholder="Enter Your gender" required id="gender"/>
-                        <i class="fa-solid fa-mercury"></i>
-                        
-                    </div>
-
-                    <div class="checkbox-text">
-                        <div class="checkbox-content">
-                            <input type="checkbox" id="termCon"/>
-                            <label for="termCon" class="text">I accepted all terms and conditions</label>
-                        </div>
-                    </div> 
-                 
-
-                    <div class="input-field button">
-                      <button> <input type="button" value="Signup" / ></button> 
-                    </div> 
-
-                 
-                   
-                 
-                </form>
-
-                <div class="login-signup" >
-                    <span class="text">Already a member?
-                        <a href="#" class="text login-link">Login Now</a>
-                    </span>
-                </div>
-                
-            </div>
+<div className='contianer'>
+      <div className='image'>
+  <img src="https://colorlib.com/etc/lf/Login_v18/images/bg-01.jpg" alt="Pic" />
+      </div>
+        <div>
+            <p className='h1'>Sigup to continue</p>
         </div>
-    </div>
+       <div>
+        <form onSubmit={signupHandler}>
+ 
+   
+         <input type="text" onChange={(e) => { setFirstName(e.target.value) }}
+          placeholder='First Name' 
+          className='field email' /> <br />
+
+           <input type="text" placeholder='Last Name' onChange={(e) => { setLastName(e.target.value) }}
+            className='field pass'/> <br />
+           
+         <input type="text"   placeholder='Email' onChange={(e) => { setEmail(e.target.value) }}
+          className='field email'/> <br />
+
+        <input type="password" placeholder='Password'   onChange={(e) => { setPassword(e.target.value) }}
+        className='field pass'/> <br />
+          <div className='checkbox'> <input type="checkbox" 
+         className='check'/> <p>Remember</p> <p className='forget'>Forget 
+            Password?</p></div>
+          <button className='submit' type="submit">Submit</button>
+       </form>
+       <div className='signup'>or signup with using</div>
+       <div className='social'>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-7y4cEij0T78S2WxMp6RA5foiJCUp089Zq-Gcy1JobI49LPSoxsceBedd7kTYg8tZ2r8&usqp=CAU" className='facebook' alt="" />
+        <img src="https://e7.pngegg.com/pngimages/708/311/png-clipart-icon-logo-twitter-logo-twitter-logo-blue-social-media-thumbnail.png" className='twitter' alt="" />
+       </div>
+</div>
+        </div>
+
+        
+        <ToastContainer />
 </>
    
    
         
         );
     }
+    export default Signup;
