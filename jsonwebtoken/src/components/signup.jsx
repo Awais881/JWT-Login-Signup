@@ -43,6 +43,17 @@ function Signup() {
 
         } catch (e) {
             console.log("e: ", e);
+            toast.error('Error', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+
         }
 
 
@@ -61,7 +72,7 @@ function Signup() {
   <img src="https://colorlib.com/etc/lf/Login_v18/images/bg-01.jpg" alt="Pic" />
       </div>
         <div>
-            <p className='h1'>Sigup to continue</p>
+            <p className='h1'>Signup to continue</p>
         </div>
        <div>
         <form onSubmit={signupHandler}>

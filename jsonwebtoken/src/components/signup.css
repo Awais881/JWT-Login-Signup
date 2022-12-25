@@ -1,6 +1,6 @@
 .h1{
     position: absolute;
-    top: 10px;
+    top: 35px;
     right: 100px;
     color: #333333;
     font-size: 30px;
@@ -12,12 +12,12 @@
     .contianer{
         display: flex;
         align-items: center;
-           
+         
     
     }
     
     .field {
-        width: 450px;
+        width: 400px;
         height: 56px;
         border-radius: 4px;
         position: relative;
@@ -104,4 +104,8 @@
         margin-left: 200px;
     color: #555555;
     
+    }
+    .image{
+ width: 680px;
+
     }
