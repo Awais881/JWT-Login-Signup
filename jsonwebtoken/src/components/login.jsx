@@ -90,7 +90,7 @@ function Login() {
             Password?</p></div>
           <button className='submit' type="submit">Submit</button>
        </form>
-       <div className='signup'>or login with using</div>
+       <div className='signup'> login with using</div>
   <div className='social'> 
      <span className="facebook"><Facebook /></span>
      <span className="twitter"><Twitter /></span>
