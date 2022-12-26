@@ -5,6 +5,8 @@ import { GlobalContext } from './context/context';
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 import Signup from "./components/signup"
 import Login from './components/login';
+import Products from './components/products';
+
 import axios from 'axios'
 import Home from "./components/home";
 import About from "./components/about";
@@ -62,7 +64,7 @@ function App() {
             <li> <Link to={`/`}><Button size="medium"  variant="contained"  >Home</Button></Link> </li>
             <li> <Link to={`/contact`}><Button size="medium" variant="contained"   >Contact</Button></Link> </li>
             <li> <Link to={`/about`}><Button size="medium"  variant="contained" >About</Button></Link> </li>
-            <li> <Link to={`/profile`}><Button size="medium"  variant="contained" >Profile</Button></Link> </li>
+            <li> <Link to={`/product`}><Button size="medium"  variant="contained" >Product</Button></Link> </li>
             {/* <li> {fullName} <button onClick={logoutHandler}>Logout</button> </li> */}
           </ul>
           : null
@@ -81,6 +83,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="product" element={<Products />} />
           <Route path="*" element={<Navigate to="/" replace={true} />} />
         </Routes>
         : null}

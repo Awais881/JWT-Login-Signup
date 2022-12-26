@@ -21,7 +21,7 @@ header{
 }
 
 .navBar > li > a {
- padding: 10px;
+ /* padding: 10px; */
  text-decoration: none;
 }
 
