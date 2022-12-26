@@ -19,7 +19,7 @@ function App() {
   let { state, dispatch } = useContext(GlobalContext);
   useEffect(() => {
 
-    const baseUrl = 'https://tan-comfortable-badger.cyclic.app'
+    const baseUrl = 'http://localhost:5001'
 
     const getProfile = async () => {
 
