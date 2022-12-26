@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { GlobalContext } from '../context/context';
 import { Facebook, Twitter} from '@mui/icons-material';
-const baseUrl = 'https://tan-comfortable-badger.cyclic.app'
+const baseUrl = 'http://localhost:5001'
 
 function Login() {
 
@@ -90,7 +90,7 @@ function Login() {
             Password?</p></div>
           <button className='submit' type="submit">Submit</button>
        </form>
-       <div className='signup'> login with using</div>
+       <div className='signup'>or login with using</div>
   <div className='social'> 
      <span className="facebook"><Facebook /></span>
      <span className="twitter"><Twitter /></span>

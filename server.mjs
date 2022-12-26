@@ -12,12 +12,10 @@ import {
 } from "bcrypt-inzi"
 import cookieParser from 'cookie-parser';
 mongoose.set('strictQuery', true);
-app.use(cors(
-//     {
-//     // origin: ['https://tan-comfortable-badger.cyclic.app', "*"],
-//     // credentials: true
-// }
-));
+app.use(cors({
+    origin: ['http://localhost:3000', "*"],
+    credentials: true
+}));
 const SECRET = process.env.SECRET || "topsecret";
 app.use(express.json());
 app.use(cookieParser());

@@ -6,7 +6,7 @@ import { Facebook, Twitter} from '@mui/icons-material';
 import { ToastContainer, toast } from 'react-toastify';
 
 
-const baseUrl = 'https://tan-comfortable-badger.cyclic.app'
+const baseUrl = 'http://localhost:5001'
 
 
 function Signup() {
