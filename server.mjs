@@ -385,8 +385,8 @@ app.put('/product/:id', async (req, res) => {
 
 
 const __dirname = path.resolve();
-app.use('/', express.static(path.join(__dirname, './e-commerce/build')))
-app.use('*', express.static(path.join(__dirname, './e-commerce/build')))
+app.use('/', express.static(path.join(__dirname, './jsonwebtoken/build')))
+app.use('*', express.static(path.join(__dirname, './jsonwebtoken/build')))
 
 
 app.listen(port, () => {
