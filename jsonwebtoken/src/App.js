@@ -9,6 +9,7 @@ import axios from 'axios'
 import Home from "./components/home";
 import About from "./components/about";
 import Contact from "./components/contact";
+import Button from '@mui/material/Button';
 
 function App() {
 
@@ -58,10 +59,10 @@ function App() {
   {
         (state.isLogin === true) ?
           <ul className='navBar'>
-            <li> <Link to={`/`}>Home</Link> </li>
-            <li> <Link to={`/contact`}>Contact</Link> </li>
-            <li> <Link to={`/about`}>About</Link> </li>
-            <li> <Link to={`/profile`}>Profile</Link> </li>
+            <li> <Link to={`/`}><Button size="medium"  variant="contained"  >Home</Button></Link> </li>
+            <li> <Link to={`/contact`}><Button size="medium" variant="contained"   >Contact</Button></Link> </li>
+            <li> <Link to={`/about`}><Button size="medium"  variant="contained" >About</Button></Link> </li>
+            <li> <Link to={`/profile`}><Button size="medium"  variant="contained" >Profile</Button></Link> </li>
             {/* <li> {fullName} <button onClick={logoutHandler}>Logout</button> </li> */}
           </ul>
           : null
@@ -69,8 +70,8 @@ function App() {
       {
         (state.isLogin === false) ?
           <ul className='navBar'>
-            <li> <Link to={`/`}>Login</Link> </li>
-            <li> <Link to={`/signup`}>Signup</Link> </li>
+            <li> <Link to={`/`}>  <Button size="medium" variant="contained" >Login</Button></Link> </li>
+            <li> <Link to={`/signup`}><Button size="medium" variant="contained" >Signup</Button></Link> </li>
           </ul> : null
       }
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { GlobalContext } from '../context/context';
-
+import { Facebook, Twitter} from '@mui/icons-material';
 const baseUrl = 'http://localhost:5001'
 
 function Login() {
@@ -24,10 +24,6 @@ function Login() {
         }, {
             withCredentials: true
         })
-        dispatch({
-            type: 'USER_LOGIN',
-                payload: null
-        })
         toast('Login Succuesful ', {
             position: "top-right",
             autoClose: 5000,
@@ -38,6 +34,11 @@ function Login() {
             progress: undefined,
             theme: "dark",
             });
+        dispatch({
+            type: 'USER_LOGIN',
+                payload: null
+        })
+       
         console.log("Login  successful");
        
 
@@ -89,15 +90,19 @@ function Login() {
             Password?</p></div>
           <button className='submit' type="submit">Submit</button>
        </form>
-       <div className='signup'>or signup with using</div>
-       <div className='social'>
+       <div className='signup'>or login with using</div>
+  <div className='social'> 
+     <span className="facebook"><Facebook /></span>
+     <span className="twitter"><Twitter /></span>
+     </div>
+       {/* <div className='social'>
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-7y4cEij0T78S2WxMp6RA5foiJCUp089Zq-Gcy1JobI49LPSoxsceBedd7kTYg8tZ2r8&usqp=CAU" className='facebook' alt="" />
         <img src="https://e7.pngegg.com/pngimages/708/311/png-clipart-icon-logo-twitter-logo-twitter-logo-blue-social-media-thumbnail.png" className='twitter' alt="" />
-       </div>
+       </div> */}
 </div>
         </div>
    
-   
+        <ToastContainer />
    </>
 
 
