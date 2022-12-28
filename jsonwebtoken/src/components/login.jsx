@@ -4,7 +4,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { GlobalContext } from '../context/context';
 import { Facebook, Twitter} from '@mui/icons-material';
-const baseUrl = 'http://localhost:5001'
+let baseUrl = ``;
+if (window.location.href.split(":")[0] === "http") {
+    baseUrl = `http://localhost:5001`;
+}
 
 function Login() {
 

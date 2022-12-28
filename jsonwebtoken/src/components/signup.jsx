@@ -6,7 +6,10 @@ import { Facebook, Twitter} from '@mui/icons-material';
 import { ToastContainer, toast } from 'react-toastify';
 
 
-const baseUrl = 'http://localhost:5001'
+let baseUrl = ``;
+if (window.location.href.split(":")[0] === "http") {
+    baseUrl = `http://localhost:5001`;
+}
 
 
 function Signup() {
