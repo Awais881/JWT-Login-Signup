@@ -29,43 +29,7 @@ function App() {
 
   let { state, dispatch } = useContext(GlobalContext);
   
-  const logoutHandler = async () => {
-    
-    try {
-      let response = await axios.post(`${state.baseUrl}/logout`, {
-        withCredentials: true
-      })
-      console.log("response: ", response);
-      toast('Logout Succuesful ', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        });
-      dispatch({
-        type: 'USER_LOGOUT'
-      })
-    } catch (error) {
-      console.log("axios error: ", error);
-      toast.error('Logout Error', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        });
-
-    }
-
-  }
-
+ 
 
 
   useEffect(() => {
@@ -116,7 +80,7 @@ function App() {
             <li> <Link to={`/contact`}><Button size="medium" variant="contained"  >Contact</Button></Link> </li>
             <li> <Link to={`/about`}><Button size="medium"  variant="contained" >About</Button></Link> </li>
             <li> <Link to={`/gallery`}><Button size="medium"  variant="contained" >Gallery</Button></Link> </li>
-            <li> <Button size="medium"  variant="contained"  onClick={logoutHandler}>Logout</Button> </li> 
+            {/* <li> <Button size="medium"  variant="contained"  onClick={logoutHandler}>Logout</Button> </li>  */}
             
           </ul>
           : null

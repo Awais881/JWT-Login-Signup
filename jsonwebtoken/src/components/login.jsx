@@ -34,7 +34,7 @@ function Login() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: "light",
             });
         dispatch({
             type: 'USER_LOGIN',
@@ -97,10 +97,7 @@ function Login() {
      <span className="facebook"><Facebook /></span>
      <span className="twitter"><Twitter /></span>
      </div>
-       {/* <div className='social'>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-7y4cEij0T78S2WxMp6RA5foiJCUp089Zq-Gcy1JobI49LPSoxsceBedd7kTYg8tZ2r8&usqp=CAU" className='facebook' alt="" />
-        <img src="https://e7.pngegg.com/pngimages/708/311/png-clipart-icon-logo-twitter-logo-twitter-logo-blue-social-media-thumbnail.png" className='twitter' alt="" />
-       </div> */}
+      
 </div>
         </div>
    

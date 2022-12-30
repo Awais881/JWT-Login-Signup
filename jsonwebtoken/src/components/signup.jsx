@@ -39,7 +39,7 @@ function Signup() {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "dark",
+                theme: "light",
                 });
             console.log("signup successful");
            
@@ -77,7 +77,7 @@ function Signup() {
         <div>
             <p className='h1'>Signup to continue</p>
         </div>
-       <div>
+       <div className="box">
         <form onSubmit={signupHandler}>
  
    

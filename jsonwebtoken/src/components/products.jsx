@@ -1,12 +1,12 @@
+import './products.css';
 import axios from "axios";
 import {useEffect, useState, useContext } from "react";
-import { EmojiEmotions, ExpandMore, Group, Home, Image, Share, Mail, Margin, Message, Notifications,
-   PersonAdd, Place, PlayArrow, PlayCircle, Storefront, VideoCameraBack, YouTube, Favorite, MoreVert,
-    Drafts, Send, Inbox, StarBorder, ExpandLess, LiveTv, SportsEsports, CheckBox,
-   FavoriteBorder, ToggleOffOutlined, Mode, ModeNight,PeopleAlt, Logout} from '@mui/icons-material'
+import { EmojiEmotions,  Home, Image, Share, Mail, Notifications,
+   PersonAdd,  YouTube, Favorite, MoreVert,
+    StarBorder, ExpandLess, LiveTv, SportsEsports, VideoCameraBack, PlayCircle,Inbox,
+   FavoriteBorder, ModeNight,PeopleAlt, Logout} from '@mui/icons-material'
    import moment from 'moment'
 import 'react-toastify/dist/ReactToastify.css';
-
 import { ToastContainer, toast } from 'react-toastify';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -42,7 +42,43 @@ function Products() {
     const [open, setOpen] = useState(false);
        // Get All Products
 
-
+       const logoutHandler = async () => {
+    
+        try {
+          let response = await axios.post(`${state.baseUrl}/logout`, {
+            withCredentials: true
+          })
+          console.log("response: ", response);
+          toast('Logout Succuesful ', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+          dispatch({
+            type: 'USER_LOGOUT'
+          })
+        } catch (error) {
+          console.log("axios error: ", error);
+          toast.error('Logout Error', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+    
+        }
+    
+      }
+    
 
        const getAllProducts = () => {
         axios.get(`${state.baseUrl}/products`)
@@ -263,7 +299,7 @@ let editObj=   {
       >
         <MenuItem >Profile</MenuItem>
         <MenuItem >My account</MenuItem>
-        <MenuItem >Logout</MenuItem>
+        <MenuItem  onClick={logoutHandler}>Logout</MenuItem>
       </Menu>
       </AppBar>    
 
@@ -368,7 +404,8 @@ let editObj=   {
                     src="https://avatars.githubusercontent.com/u/102538169?v=4" />
                   <Typography fontWeight={500} variant="span">Awais Ahmed</Typography>
                 </UserBox1>
-                <form onSubmit={saveProduct} sx={{ width: "100%" }}>
+                <div className='form'>
+                <form onSubmit={saveProduct} sx={{ width: "100%" }} >
                   <TextField
                     sx={{ width: "100%" }}
                     id="standard-multiline-static"
@@ -410,6 +447,7 @@ let editObj=   {
                  
                   </ButtonGroup>
                 </form>
+                </div>
               </Box>
             </Box>
             </Box> 
