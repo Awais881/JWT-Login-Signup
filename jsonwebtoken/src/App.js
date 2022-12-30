@@ -6,25 +6,77 @@ import { Routes, Route, Link, Navigate } from "react-router-dom";
 import Signup from "./components/signup"
 import Login from './components/login';
 import Products from './components/products';
+import Gallery from './components/gallery';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 import axios from 'axios'
-import Home from "./components/home";
+import HomeIcon from '@mui/icons-material/Home';
 import About from "./components/about";
 import Contact from "./components/contact";
 import Button from '@mui/material/Button';
+import { ButtonBase } from '@mui/material';
+
+
+
+
+
 
 function App() {
 
 
+
+  const [open, setOpen] = useState(false);
   let { state, dispatch } = useContext(GlobalContext);
+  
+  const logoutHandler = async () => {
+    
+    try {
+      let response = await axios.post(`${state.baseUrl}/logout`, {
+        withCredentials: true
+      })
+      console.log("response: ", response);
+      toast('Logout Succuesful ', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+      dispatch({
+        type: 'USER_LOGOUT'
+      })
+    } catch (error) {
+      console.log("axios error: ", error);
+      toast.error('Logout Error', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+
+    }
+
+  }
+
+
+
   useEffect(() => {
 
-    const baseUrl = 'http://localhost:5001'
-
+  
+    
+  
     const getProfile = async () => {
 
       try {
-        let response = await axios.get(`${baseUrl}/products`, {
+        let response = await axios.get(`${state.baseUrl}/products`, {
           withCredentials: true
         })
 
@@ -64,8 +116,9 @@ function App() {
             <li> <Link to={`/`}><Button size="medium"  variant="contained"  >Home</Button></Link> </li>
             <li> <Link to={`/contact`}><Button size="medium" variant="contained"   >Contact</Button></Link> </li>
             <li> <Link to={`/about`}><Button size="medium"  variant="contained" >About</Button></Link> </li>
-            <li> <Link to={`/product`}><Button size="medium"  variant="contained" >Product</Button></Link> </li>
-            {/* <li> {fullName} <button onClick={logoutHandler}>Logout</button> </li> */}
+            <li> <Link to={`/gallery`}><Button size="medium"  variant="contained" >Gallery</Button></Link> </li>
+            <li> <Button size="medium"  variant="contained"  onClick={logoutHandler}>Logout</Button> </li> 
+            
           </ul>
           : null
       }
@@ -80,10 +133,10 @@ function App() {
       {(state.isLogin === true) ?
 
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Products />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="product" element={<Products />} />
+          <Route path="gallery" element={<Gallery />} />
           <Route path="*" element={<Navigate to="/" replace={true} />} />
         </Routes>
         : null}
@@ -105,7 +158,7 @@ function App() {
         : null}
 
 
-
+<ToastContainer />
 
     </>
   );

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {useEffect, useState } from "react";
+import {useEffect, useState, useContext } from "react";
 import { EmojiEmotions, ExpandMore, Group, Home, Image, Share, Mail, Margin, Message, Notifications,
    PersonAdd, Place, PlayArrow, PlayCircle, Storefront, VideoCameraBack, YouTube, Favorite, MoreVert,
     Drafts, Send, Inbox, StarBorder, ExpandLess, LiveTv, SportsEsports, CheckBox,
@@ -8,7 +8,7 @@ import { EmojiEmotions, ExpandMore, Group, Home, Image, Share, Mail, Margin, Mes
 import 'react-toastify/dist/ReactToastify.css';
 
 import { ToastContainer, toast } from 'react-toastify';
-import { red } from '@mui/material/colors'
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box } from '@mui/system'
 import HomeIcon from '@mui/icons-material/Home';
@@ -18,18 +18,14 @@ import { AppBar, Avatar, AvatarGroup, Badge, Button, ButtonGroup, Card, CardActi
     ListItemIcon, ListItemText, ListSubheader, Menu, MenuItem, Select, Stack, styled, Switch, TextField, 
     Toolbar, Typography
 } from '@mui/material'
+import { GlobalContext } from '../context/context';
 
 
 
 
-let baseURI = ``;
-if (window.location.href.split(":")[0] === "http") {
-   baseURI = `http://localhost:5001`;
-}
 
 function Products() {
-    // const [del, setDel] = useState(""); 
-    // const [chapli, setchapli] = useState(false);
+  let { state, dispatch } = useContext(GlobalContext);
     const [products, setProducts] = useState([]);
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
@@ -49,7 +45,7 @@ function Products() {
 
 
        const getAllProducts = () => {
-        axios.get(`${baseURI}/products`)
+        axios.get(`${state.baseUrl}/products`)
           .then(response => {
             console.log("AllProducts", response.data.data);
             setProducts(response.data.data.reverse())
@@ -94,7 +90,7 @@ let editObj=   {
           const saveProduct = async (e) => {
             e.preventDefault();
             try {
-              const response = await axios.post(`${baseURI}/product`, object)
+              const response = await axios.post(`${state.baseUrl}/product`, object)
              
               //  {
               //   name: name,
@@ -131,7 +127,7 @@ let editObj=   {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `${baseURI}/product/${editProduct.editingId}`, editObj);
+        `${state.baseUrl}/product/${editProduct.editingId}`, editObj);
         console.log(editProduct.editingId);
            setToggleReload(!toggleReload);
     
@@ -159,7 +155,7 @@ let editObj=   {
   const deleted = (id) => {
     // console.log(postId);
     setToggleReload(!toggleReload);
-    axios.delete(`${baseURI}/product/${id}`)
+    axios.delete(`${state.baseUrl}/product/${id}`)
       .then((response) => {
         console.log(response.data);
         toast.success('Deleted Sucessfully', {
@@ -223,7 +219,7 @@ let editObj=   {
   
     return (
      <>
-      {/* <AppBar position="sticky">
+       <AppBar position="sticky">
       <StyledToolbar>
         <Typography variant="h6" sx={{display: {xs: "none ", sm:"block"}  }} className="logo"> 
          E-Commerce 
@@ -269,7 +265,7 @@ let editObj=   {
         <MenuItem >My account</MenuItem>
         <MenuItem >Logout</MenuItem>
       </Menu>
-      </AppBar>    */}
+      </AppBar>    
 
   {/* leftBAr */}
 

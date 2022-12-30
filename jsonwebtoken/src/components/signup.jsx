@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from 'axios';
 import './signup.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { Facebook, Twitter} from '@mui/icons-material';
 import { ToastContainer, toast } from 'react-toastify';
+import { GlobalContext } from '../context/context';
 
 
-const baseUrl = 'http://localhost:5001'
 
 
 function Signup() {
 
-
+    let { state, dispatch } = useContext(GlobalContext);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");     
     const [email, setEmail] = useState("");
@@ -21,7 +21,7 @@ function Signup() {
         e.preventDefault();
 
         try {
-            let response = await axios.post(`${baseUrl}/signup`, {
+            let response = await axios.post(`${state.baseUrl}/signup`, {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,

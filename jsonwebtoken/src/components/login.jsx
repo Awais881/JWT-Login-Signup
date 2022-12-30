@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { GlobalContext } from '../context/context';
 import { Facebook, Twitter} from '@mui/icons-material';
-const baseUrl = 'http://localhost:5001'
+
 
 function Login() {
 
@@ -18,7 +18,7 @@ function Login() {
     e.preventDefault();
 
     try {
-        let response = await axios.post(`${baseUrl}/login`, {
+        let response = await axios.post(`${state.baseUrl}/login`, {
             email: email,
             password: password
         }, {
@@ -36,7 +36,7 @@ function Login() {
             });
         dispatch({
             type: 'USER_LOGIN',
-                payload: null
+             payload: null
         })
        
         console.log("Login  successful");

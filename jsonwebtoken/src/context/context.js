@@ -7,7 +7,11 @@ let data = {
   darkTheme: true,
   user: {},
   isLogin: null,
+  baseUrl:  (window.location.href.split(":")[0] === "http")
+  ?
+  `http://localhost:5001/api/v1` : `/api/v1`
 }
+
 
 export default function ContextProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, data)
@@ -16,4 +20,4 @@ export default function ContextProvider({ children }) {
       {children}
     </GlobalContext.Provider>
   )
-}
+} 
