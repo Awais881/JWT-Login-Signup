@@ -26,7 +26,7 @@ function App() {
 
 
 
-  const [open, setOpen] = useState(false);
+
   let { state, dispatch } = useContext(GlobalContext);
   
   const logoutHandler = async () => {
@@ -71,8 +71,7 @@ function App() {
   useEffect(() => {
 
   
-    
-  
+
     const getProfile = async () => {
 
       try {
@@ -114,7 +113,7 @@ function App() {
         (state.isLogin === true) ?
           <ul className='navBar'>
             <li> <Link to={`/`}><Button size="medium"  variant="contained"  >Home</Button></Link> </li>
-            <li> <Link to={`/contact`}><Button size="medium" variant="contained"   >Contact</Button></Link> </li>
+            <li> <Link to={`/contact`}><Button size="medium" variant="contained"  >Contact</Button></Link> </li>
             <li> <Link to={`/about`}><Button size="medium"  variant="contained" >About</Button></Link> </li>
             <li> <Link to={`/gallery`}><Button size="medium"  variant="contained" >Gallery</Button></Link> </li>
             <li> <Button size="medium"  variant="contained"  onClick={logoutHandler}>Logout</Button> </li> 

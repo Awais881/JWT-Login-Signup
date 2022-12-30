@@ -9,6 +9,9 @@ import { GlobalContext } from '../context/context';
 
 
 
+
+
+
 function Signup() {
 
     let { state, dispatch } = useContext(GlobalContext);

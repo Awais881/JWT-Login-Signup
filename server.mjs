@@ -237,7 +237,10 @@ app.use("/api/v1",(req, res ,next ) =>{
             maxAge: 1,
             httpOnly: true,
             sameSite: 'none',
-            secure: true
+            secure: true,
+              httpOnly: true
+            
+
         });
         res.send({ message: "token expired" })
       } else{
