@@ -20,14 +20,14 @@ function Login() {
     e.preventDefault();
 
     try {
-        let response = await axios.post(`${state.baseUrl}/login`, {
+        let response = await axios.post(`${state.baseUrl}/api/v1/login`, {
             email: email,
             password: password
         }, {
             withCredentials: true
         })
         toast('Login Succuesful ', {
-            position: "top-right",
+            position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -48,7 +48,7 @@ function Login() {
     catch (err) {
         console.log("err: ", err);
         toast.error('Error', {
-            position: "top-right",
+            position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,

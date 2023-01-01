@@ -9,7 +9,7 @@ import Products from './components/products';
 import Gallery from './components/gallery';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-
+import Loader from "./assets/loader.gif"
 import axios from 'axios'
 import HomeIcon from '@mui/icons-material/Home';
 import About from "./components/about";
@@ -39,7 +39,7 @@ function App() {
     const getProfile = async () => {
 
       try {
-        let response = await axios.get(`${state.baseUrl}/products`, {
+        let response = await axios.get(`${state.baseUrl}/api/v1/products`, {
           withCredentials: true
         })
 
@@ -115,7 +115,7 @@ function App() {
       {(state.isLogin === null) ?
 
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: '100vh' }}>
-          <img width={300} src="https://cdn.dribbble.com/users/1787505/screenshots/7300251/media/a351d9e0236c03a539181b95faced9e0.gif" alt="" />
+          <img width={300} src={Loader} alt="" />
         </div>
 
         : null}

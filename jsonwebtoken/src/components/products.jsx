@@ -45,12 +45,12 @@ function Products() {
        const logoutHandler = async () => {
     
         try {
-          let response = await axios.post(`${state.baseUrl}/logout`, {
+          let response = await axios.post(`${state.baseUrl}/api/v1/logout`, {
             withCredentials: true
           })
           console.log("response: ", response);
           toast('Logout Succuesful ', {
-            position: "top-right",
+            position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -65,7 +65,7 @@ function Products() {
         } catch (error) {
           console.log("axios error: ", error);
           toast.error('Logout Error', {
-            position: "top-right",
+            position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -81,7 +81,7 @@ function Products() {
     
 
        const getAllProducts = () => {
-        axios.get(`${state.baseUrl}/products`)
+        axios.get(`${state.baseUrl}/api/v1/products`)
           .then(response => {
             console.log("AllProducts", response.data.data);
             setProducts(response.data.data.reverse())
@@ -126,7 +126,7 @@ let editObj=   {
           const saveProduct = async (e) => {
             e.preventDefault();
             try {
-              const response = await axios.post(`${state.baseUrl}/product`, object)
+              const response = await axios.post(`${state.baseUrl}/api/v1/product`, object)
              
               //  {
               //   name: name,
@@ -147,23 +147,25 @@ let editObj=   {
             });
             } catch (err) {
               console.log("err", err);
+              toast.error('Failed', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
             }
           };
            
-       
-          
-        
-        
-  
-
-
-
-
+      
   const updateHandler = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `${state.baseUrl}/product/${editProduct.editingId}`, editObj);
+        `${state.baseUrl}/api/v1/product/${editProduct.editingId}`, editObj);
         console.log(editProduct.editingId);
            setToggleReload(!toggleReload);
     
@@ -185,13 +187,23 @@ let editObj=   {
         });
     } catch (err) {
       console.log("err", err);
+      toast.error('Update Error', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
   };
 
   const deleted = (id) => {
     // console.log(postId);
     setToggleReload(!toggleReload);
-    axios.delete(`${state.baseUrl}/product/${id}`)
+    axios.delete(`${state.baseUrl}/api/v1/product/${id}`)
       .then((response) => {
         console.log(response.data);
         toast.success('Deleted Sucessfully', {
@@ -209,7 +221,7 @@ let editObj=   {
  
       .catch((err) => {
         console.log("err", err);
-        toast.error('Error', {
+        toast.error('Delete Error', {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -530,7 +542,8 @@ let editObj=   {
            (<div>
            
                 <h1>update form</h1>
-                     <form onSubmit={updateHandler}>
+              <div className='UpdateForm'>    
+                 <form onSubmit={updateHandler}>
 
                      <TextField
                     sx={{ width: "100%" }}
@@ -572,7 +585,7 @@ let editObj=   {
             Proced Update
              </Button>
              </form>
-     
+             </div> 
            </div>): null 
          }
     </Card>

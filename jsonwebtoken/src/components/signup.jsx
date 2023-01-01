@@ -24,7 +24,7 @@ function Signup() {
         e.preventDefault();
 
         try {
-            let response = await axios.post(`${state.baseUrl}/signup`, {
+            let response = await axios.post(`${state.baseUrl}/api/v1/signup`, {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
@@ -32,7 +32,7 @@ function Signup() {
             })
 
             toast('Signup Succuesful ', {
-                position: "top-right",
+                position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -47,7 +47,7 @@ function Signup() {
         } catch (e) {
             console.log("e: ", e);
             toast.error('Error', {
-                position: "top-right",
+                position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
