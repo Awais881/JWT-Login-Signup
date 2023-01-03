@@ -117,7 +117,7 @@ router.put('/api/v1/product/:id', async (req, res) => {
   
           res.send({
               message: "product modified successfully",
-              data: products
+              data: data
           });
   
       } catch (error) {

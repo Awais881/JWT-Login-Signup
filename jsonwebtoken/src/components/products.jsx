@@ -1,22 +1,25 @@
 import './products.css';
 import axios from "axios";
-import {useEffect, useState, useContext } from "react";
-import { EmojiEmotions,  Home, Image, Share, Mail, Notifications,
-   PersonAdd,  YouTube, Favorite, MoreVert,
-    StarBorder, ExpandLess, LiveTv, SportsEsports, VideoCameraBack, PlayCircle,Inbox,
-   FavoriteBorder, ModeNight,PeopleAlt, Logout} from '@mui/icons-material'
-   import moment from 'moment'
+import { useEffect, useState, useContext } from "react";
+import {
+  EmojiEmotions, Home, Image, Share, Mail, Notifications,
+  PersonAdd, YouTube, Favorite, MoreVert,
+  StarBorder, ExpandLess, LiveTv, SportsEsports, VideoCameraBack, PlayCircle, Inbox,
+  FavoriteBorder, ModeNight, PeopleAlt, Logout
+} from '@mui/icons-material'
+import moment from 'moment'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box } from '@mui/system'
 import HomeIcon from '@mui/icons-material/Home';
-import { AppBar, Avatar, AvatarGroup, Badge, Button, ButtonGroup, Card, CardActions, CardContent,
-   CardHeader, CardMedia, Checkbox, Collapse, Divider, FormControl, Icon, IconButton, ImageList,
-    ImageListItem, Input,InputBase, InputLabel, List, ListItem, ListItemAvatar, ListItemButton, 
-    ListItemIcon, ListItemText, ListSubheader, Menu, MenuItem, Select, Stack, styled, Switch, TextField, 
-    Toolbar, Typography
+import {
+  AppBar, Avatar, AvatarGroup, Badge, Button, ButtonGroup, Card, CardActions, CardContent,
+  CardHeader, CardMedia, Checkbox, Collapse, Divider, FormControl, Icon, IconButton, ImageList,
+  ImageListItem, Input, InputBase, InputLabel, List, ListItem, ListItemAvatar, ListItemButton,
+  ListItemIcon, ListItemText, ListSubheader, Menu, MenuItem, Select, Stack, styled, Switch, TextField,
+  Toolbar, Typography
 } from '@mui/material'
 import { GlobalContext } from '../context/context';
 
@@ -26,76 +29,78 @@ import { GlobalContext } from '../context/context';
 
 function Products() {
   let { state, dispatch } = useContext(GlobalContext);
-    const [products, setProducts] = useState([]);
-    const [name, setName] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
-    const [toggleReload, setToggleReload] = useState(false);
-    const [editProduct, setEditProduct] = useState(
-      { editingId: null,
-        editingName: "",
-        editingPrice: "",
-        editingDescription: ""
-      }
-    );
-   
-    const [open, setOpen] = useState(false);
-       // Get All Products
+  const [products, setProducts] = useState([]);
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [deleter, setDeleter] = useState("");
+  const [description, setDescription] = useState("");
+  const [toggleReload, setToggleReload] = useState(false);
+  const [editProduct, setEditProduct] = useState(
+    {
+      editingId: null,
+      editingName: "",
+      editingPrice: "",
+      editingDescription: ""
+    }
+  );
 
-       const logoutHandler = async () => {
-    
-        try {
-          let response = await axios.post(`${state.baseUrl}/api/v1/logout`, {
-            withCredentials: true
-          })
-          console.log("response: ", response);
-          toast('Logout Succuesful ', {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
-          dispatch({
-            type: 'USER_LOGOUT'
-          })
-        } catch (error) {
-          console.log("axios error: ", error);
-          toast.error('Logout Error', {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
-    
-        }
-    
-      }
-    
+  const [open, setOpen] = useState(false);
+  // Get All Products
 
-       const getAllProducts = () => {
-        axios.get(`${state.baseUrl}/api/v1/products`)
-          .then(response => {
-            console.log("AllProducts", response.data.data);
-            setProducts(response.data.data.reverse())
-          })
-          .catch(err => {
-            console.log("err", err);
-          })
-      };
-    
-       
-    useEffect(() => {
+  const logoutHandler = async () => {
+
+    try {
+      let response = await axios.post(`${state.baseUrl}/api/v1/logout`, {
+        withCredentials: true
+      })
+      console.log("response: ", response);
+      toast('Logout Succuesful ', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      dispatch({
+        type: 'USER_LOGOUT'
+      })
+    } catch (error) {
+      console.log("axios error: ", error);
+      toast.error('Logout Error', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
+    }
+
+  }
 
 
-      getAllProducts();
+  const getAllProducts = () => {
+    axios.get(`${state.baseUrl}/api/v1/products`)
+      .then(response => {
+        console.log("AllProducts", response.data.data);
+        setProducts(response.data.data.reverse())
+      })
+      .catch(err => {
+        console.log("err", err);
+      })
+  };
+
+
+  useEffect(() => {
+
+
+    getAllProducts();
 
 
   }, [toggleReload])
@@ -106,69 +111,69 @@ function Products() {
 
 
 
-let editObj=   {
-         name: editProduct.editingName,
-         price: editProduct.editingPrice,
-         description: editProduct.editingDescription
-}
+  let editObj = {
+    name: editProduct.editingName,
+    price: editProduct.editingPrice,
+    description: editProduct.editingDescription
+  }
 
 
 
-    let object ={
-      name: name,
-      price: price,
-      description: description
+  let object = {
+    name: name,
+    price: price,
+    description: description
+  }
+  // Add Products
+
+
+
+  const saveProduct = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(`${state.baseUrl}/api/v1/product`, object)
+
+      //  {
+      //   name: name,
+      //   price: price,
+      //   description: description,
+      // });
+      setToggleReload(!toggleReload)
+      console.log(object)
+      toast.success('Added Sucessfully', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } catch (err) {
+      console.log("err", err);
+      toast.error('Failed', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
-               // Add Products
-  
-          
-           
-          const saveProduct = async (e) => {
-            e.preventDefault();
-            try {
-              const response = await axios.post(`${state.baseUrl}/api/v1/product`, object)
-             
-              //  {
-              //   name: name,
-              //   price: price,
-              //   description: description,
-              // });
-              setToggleReload(!toggleReload)
-              console.log(object)
-            toast.success('Added Sucessfully', {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
-            } catch (err) {
-              console.log("err", err);
-              toast.error('Failed', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                });
-            }
-          };
-           
-      
+  };
+
+
   const updateHandler = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.put(
         `${state.baseUrl}/api/v1/product/${editProduct.editingId}`, editObj);
-        console.log(editProduct.editingId);
-           setToggleReload(!toggleReload);
-    
+      console.log(editProduct.editingId);
+      setToggleReload(!toggleReload);
+
       setEditProduct({
         editingId: null,
         editingName: "",
@@ -184,7 +189,7 @@ let editObj=   {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
     } catch (err) {
       console.log("err", err);
       toast.error('Update Error', {
@@ -196,14 +201,14 @@ let editObj=   {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
     }
   };
 
-  const deleted = (id) => {
+  const deleted = () => {
     // console.log(postId);
     setToggleReload(!toggleReload);
-    axios.delete(`${state.baseUrl}/api/v1/product/${id}`)
+    axios.delete(`${state.baseUrl}/api/v1/product/:${deleter}`)
       .then((response) => {
         console.log(response.data);
         toast.success('Deleted Sucessfully', {
@@ -215,10 +220,10 @@ let editObj=   {
           draggable: true,
           progress: undefined,
           theme: "light",
-          });
-          getAllProducts();
+        });
+        getAllProducts();
       })
- 
+
       .catch((err) => {
         console.log("err", err);
         toast.error('Delete Error', {
@@ -230,10 +235,10 @@ let editObj=   {
           draggable: true,
           progress: undefined,
           theme: "light",
-          });
+        });
       });
   }
-  
+
   const StyledToolbar = styled(Toolbar)({
     display: "flex",
     justifyContent: "space-between"
@@ -251,7 +256,7 @@ let editObj=   {
     gap: "20px",
     alignItems: "center",
     [theme.breakpoints.up("sm")]: { display: "flex" }
-  })) 
+  }))
   const UserBox = styled(Box)(({ theme }) => ({
     display: "flex",
     gap: "20px",
@@ -264,60 +269,60 @@ let editObj=   {
     gap: "10px",
     marginBottom: "20px"
   })
-  
-    return (
-     <>
-       <AppBar position="sticky">
-      <StyledToolbar>
-        <Typography variant="h6" sx={{display: {xs: "none ", sm:"block"}  }} className="logo"> 
-         E-Commerce 
-        </Typography> 
-    <HomeIcon sx={{display: {xs: "block ", sm:"none"}  }}  className="logo" />
-    <Search><InputBase placeholder='Search' sx={{ width: "100%" }} /></Search>
-    <Icons>
 
-    <Badge badgeContent={4} color="secondary" className="icon">
-     <Mail  />
-</Badge>
-<Badge badgeContent={4} color="secondary" className="icon">
-     <Notifications   />
-</Badge>
-<Avatar sx={{ width: 30, height: 30 }}
-              src="https://avatars.githubusercontent.com/u/102538169?v=4" 
-              
-         onClick= {e=>setOpen(true)}  
-         className="profile"   
-              />
-    </Icons>
-   <UserBox   onClick= {e=>setOpen(true)}  > 
-   <Avatar sx={{ width: 30, height: 30 }}
+  return (
+    <>
+      <AppBar position="sticky">
+        <StyledToolbar>
+          <Typography variant="h6" sx={{ display: { xs: "none ", sm: "block" } }} className="logo">
+            E-Commerce
+          </Typography>
+          <HomeIcon sx={{ display: { xs: "block ", sm: "none" } }} className="logo" />
+          <Search><InputBase placeholder='Search' sx={{ width: "100%" }} /></Search>
+          <Icons>
+
+            <Badge badgeContent={4} color="secondary" className="icon">
+              <Mail />
+            </Badge>
+            <Badge badgeContent={4} color="secondary" className="icon">
+              <Notifications />
+            </Badge>
+            <Avatar sx={{ width: 30, height: 30 }}
+              src="https://avatars.githubusercontent.com/u/102538169?v=4"
+
+              onClick={e => setOpen(true)}
+              className="profile"
+            />
+          </Icons>
+          <UserBox onClick={e => setOpen(true)}  >
+            <Avatar sx={{ width: 30, height: 30 }}
               src="https://avatars.githubusercontent.com/u/102538169?v=4" />
-  <Typography variant='span' className="profile">Awais</Typography>
-    </UserBox>
-      </StyledToolbar>
-      <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
-        open={open}
-        onClose = {e=>setOpen(false)}  
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-      >
-        <MenuItem >Profile</MenuItem>
-        <MenuItem >My account</MenuItem>
-        <MenuItem  onClick={logoutHandler}>Logout</MenuItem>
-      </Menu>
-      </AppBar>    
+            <Typography variant='span' className="profile">Awais</Typography>
+          </UserBox>
+        </StyledToolbar>
+        <Menu
+          id="demo-positioned-menu"
+          aria-labelledby="demo-positioned-button"
+          open={open}
+          onClose={e => setOpen(false)}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+        >
+          <MenuItem >Profile</MenuItem>
+          <MenuItem >My account</MenuItem>
+          <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+        </Menu>
+      </AppBar>
 
-  {/* leftBAr */}
+      {/* leftBAr */}
 
-  <Stack direction="row" spacing={2}>
+      <Stack direction="row" spacing={2}>
         <Box flex={1.5} p={2} sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
 
           <Box position={"fixed"}>
@@ -352,7 +357,7 @@ let editObj=   {
                 <ListItemText primary="Inbox" />
               </ListItemButton>
 
-             
+
 
               <ListItemButton>
                 <ListItemIcon>
@@ -395,10 +400,10 @@ let editObj=   {
 
           </Box>
         </Box>
-    
-    
 
-      <Box bgcolor={'whitesmoke'} flex={4} p={2}>
+
+
+        <Box bgcolor={'whitesmoke'} flex={4} p={2}>
           <Box>
             <Box sx={{
               display: "flex",
@@ -417,186 +422,182 @@ let editObj=   {
                   <Typography fontWeight={500} variant="span">Awais Ahmed</Typography>
                 </UserBox1>
                 <div className='form'>
-                <form onSubmit={saveProduct} sx={{ width: "100%" }} >
-                  <TextField
-                    sx={{ width: "100%" }}
-                    id="standard-multiline-static"
-                    onChange={(e) => { setName(e.target.value) }}
-                    multiline
-                    rows={1}
-                    label="Name"
-                    variant="filled" />
-                  <TextField
-                    sx={{ width: "100%" }}
-                    onChange={(e) => { setPrice(e.target.value) }}
-                    id="standard-multiline-static"
-                    multiline
-                    rows={1}
-                    label="Price"
-                    variant="filled" />
-                  <TextField
-                   variant="filled"
-                    sx={{ width: "100%" }}
-                    onChange={(e) => { setDescription(e.target.value) }}
-                    id="standard-multiline-static"
-                    multiline
-                    rows={1}
-                    label="Description"
-                     />
+                  <form onSubmit={saveProduct} sx={{ width: "100%" }} >
+                    <TextField
+                      sx={{ width: "100%" }}
+                      id="standard-multiline-static"
+                      onChange={(e) => { setName(e.target.value) }}
+                      multiline
+                      rows={1}
+                      label="Name"
+                      variant="filled" />
+                    <TextField
+                      sx={{ width: "100%" }}
+                      onChange={(e) => { setPrice(e.target.value) }}
+                      id="standard-multiline-static"
+                      multiline
+                      rows={1}
+                      type="number"
+                      label="Price"
+                      variant="filled" />
+                    <TextField
+                      variant="filled"
+                      sx={{ width: "100%" }}
+                      onChange={(e) => { setDescription(e.target.value) }}
+                      id="standard-multiline-static"
+                      multiline
+                      rows={1}
+                      label="Description"
+                    />
 
-                  <Stack direction='row' gap={1} mt={2} mb={3}>
-                    <EmojiEmotions color='primary' />
-                    <Image color='secondary' />
-                    <VideoCameraBack color='success' />
-                    <PersonAdd color='error' />
-                  </Stack>
-                  <ButtonGroup fullWidth
-                    variant='contained'
-                    aria-label='outlined primary button group'>
+                    <Stack direction='row' gap={1} mt={2} mb={3}>
+                      <EmojiEmotions color='primary' />
+                      <Image color='secondary' />
+                      <VideoCameraBack color='success' />
+                      <PersonAdd color='error' />
+                    </Stack>
+                    <ButtonGroup fullWidth
+                      variant='contained'
+                      aria-label='outlined primary button group'>
 
-                    <Button type='submit' >Add</Button>
-                    
-                 
-                  </ButtonGroup>
-                </form>
+                      <Button type='submit' >Add</Button>
+
+
+                    </ButtonGroup>
+                  </form>
                 </div>
               </Box>
             </Box>
-            </Box> 
-           
-          
- 
-
- 
-     <Box flex={2} mt="20px">
-{products?.map((eachProduct, i) => (
-
-    <Card key={i} sx={{ margin: 5 }}>
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: "red" }} aria-label="recipe">
-      {eachProduct?.name}
-
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVert />
-          </IconButton>
-        }
-        title= {eachProduct?.name}
-        subheader={moment(eachProduct.createdOn).fromNow()} 
-      />
-      <CardMedia
-        component="img"
-        height="20%"
-        image="https://images.pexels.com/photos/4534200/pexels-photo-4534200.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        alt="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          <b> Description</b>:  {eachProduct?.description}
-        </Typography> <br />
-        <Typography variant="body2" color="text.secondary">
-         <b> Price </b> :  {eachProduct?.price}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <Checkbox
-            icon={<FavoriteBorder />}
-            checkedIcon={<Favorite sx={{ color: "red" }} />}
-          />
-        </IconButton>
-        <IconButton aria-label="share">
-          <Share />
-        </IconButton>
-      </CardActions>
-      <div className="editbtn">  
-       <Button className="edit"
-       variant="outlined" color="success" onClick={() => {
-                          setEditProduct({
-                            editingId: eachProduct?._id,
-                            editingName: eachProduct?.name,
-                            editingPrice: eachProduct?.price,
-                            editingDescription: eachProduct?.description
-                          })
-                      }}>
-                      Edit</Button> &nbsp; &nbsp;
-                    
-       {/* <IconButton aria-label="delete" onClick={()=>{
-        deleted(eachProduct?.id);
-        // setDel()
-       }}>   
-       <DeleteIcon />
-       </IconButton>  */}
-        <Button variant="outlined" startIcon={<DeleteIcon />}  onClick={()=>{
-        deleted(eachProduct?._id);  }}> 
-        Delete
-      </Button>
-       </div> 
+          </Box>
 
 
-       {
-        (eachProduct._id === editProduct.editingId ) ?
-           (<div>
-           
-                <h1>update form</h1>
-              <div className='UpdateForm'>    
-                 <form onSubmit={updateHandler}>
 
-                     <TextField
-                    sx={{ width: "100%" }}
-                    id="standard-multiline-static"
-                    onChange={(e) =>
-                     { setEditProduct({ ...editProduct, editingName: e.target.value }) }}
-                     value={editProduct.editingName}
-                    multiline
-                    rows={1}
-                    label="Update Name"
-                    variant="filled" />
 
-                   <TextField
-                    sx={{ width: "100%" }}
-                    onChange={(e) => 
-                     { setEditProduct({ ...editProduct, editingPrice: e.target.value }) }}
-                     value={editProduct.editingPrice}
-                    id="standard-multiline-static"
-                    multiline
-                    rows={1}
-                    label="Update Price"
-                    variant="filled" />
 
-                   <TextField
-                    sx={{ width: "100%" }}
-                    onChange=
-                          {(e) => { setEditProduct({ ...editProduct, editingDescription : e.target.value }) }}
-                           value={editProduct.editingDescription}
-                    id="standard-multiline-static"
-                    multiline
-                    rows={1}
-                    label="Update Description"
-                    variant="filled" />
-                       
-                     
-                       <br />
-     
-                       <Button variant="contained" color="success" type='submit'>
-            Proced Update
-             </Button>
-             </form>
-             </div> 
-           </div>): null 
-         }
-    </Card>
-        ))}
+          <Box flex={2} mt="20px">
+            {products?.map((eachProduct, i) => (
+
+              <Card key={i} sx={{ margin: 5 }}>
+                <CardHeader
+                  avatar={
+                    <Avatar sx={{ bgcolor: "red" }} aria-label="recipe">
+                      {eachProduct?.name}
+
+                    </Avatar>
+                  }
+                  action={
+                    <IconButton aria-label="settings">
+                      <MoreVert />
+                    </IconButton>
+                  }
+                  title={eachProduct?.name}
+                  subheader={moment(eachProduct.createdOn).fromNow()}
+                />
+                <CardMedia
+                  component="img"
+                  height="20%"
+                  image="https://images.pexels.com/photos/4534200/pexels-photo-4534200.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                  alt="Paella dish"
+                />
+                <CardContent>
+                  <Typography variant="body2" color="text.secondary">
+                    <b> Description</b>:  {eachProduct?.description}
+                  </Typography> <br />
+                  <Typography variant="body2" color="text.secondary">
+                    <b> Price </b> :  {eachProduct?.price}
+                  </Typography>
+                </CardContent>
+                <CardActions disableSpacing>
+                  <IconButton aria-label="add to favorites">
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite sx={{ color: "red" }} />}
+                    />
+                  </IconButton>
+                  <IconButton aria-label="share">
+                    <Share />
+                  </IconButton>
+                </CardActions>
+                <div className="editbtn">
+                  <Button className="edit"
+                    variant="outlined" color="success" onClick={() => {
+                      setEditProduct({
+                        editingId: eachProduct?._id,
+                        editingName: eachProduct?.name,
+                        editingPrice: eachProduct?.price,
+                        editingDescription: eachProduct?.description
+                      })
+                    }}>
+                    Edit</Button> &nbsp; &nbsp;
+
+                
+                  <Button variant="outlined" startIcon={<DeleteIcon />} onClick={() => {
+                    setDeleter(eachProduct?._id)
+                    deleted();
+                  }}>
+                    Delete
+                  </Button>
+                </div>
+
+
+                 {
+                  (eachProduct._id === editProduct.editingId) ?
+                    (<div>
+
+                      <h1>update form</h1>
+                      <div className='UpdateForm'>
+                        <form onSubmit={updateHandler}>
+
+                          <TextField
+                            sx={{ width: "100%" }}
+                            id="standard-multiline-static"
+                            onChange={(e) => { setEditProduct({ ...editProduct, editingName: e.target.value }) }}
+                            value={editProduct.editingName}
+                            multiline
+                            rows={1}
+                            label="Update Name"
+                            variant="filled" />
+
+                          <TextField
+                            sx={{ width: "100%" }}
+                            onChange={(e) => { setEditProduct({ ...editProduct, editingPrice: e.target.value }) }}
+                            value={editProduct.editingPrice}
+                            id="standard-multiline-static"
+                            multiline
+                            rows={1}
+                            label="Update Price"
+                            variant="filled" />
+
+                          <TextField
+                            sx={{ width: "100%" }}
+                            onChange=
+                            {(e) => { setEditProduct({ ...editProduct, editingDescription: e.target.value }) }}
+                            value={editProduct.editingDescription}
+                            id="standard-multiline-static"
+                            multiline
+                            rows={1}
+                            label="Update Description"
+                            variant="filled" />
+
+
+                          <br />
+
+                          <Button variant="contained" color="success" type='submit'>
+                            Proced Update
+                          </Button>
+                        </form>
+                      </div>
+                    </div>) : null
+                } 
+              </Card>
+            ))}
+          </Box>
         </Box>
-        </Box>
-      
 
 
 
-{/* 
+
+        {/* 
 <div>
  
      {products?.map((eachProduct, i) => (
@@ -642,30 +643,30 @@ let editObj=   {
       </CardActions>
     </Card>
     </div> */}
-       {/* <div className="time">{new Date().toDateString()}</div> */}
+        {/* <div className="time">{new Date().toDateString()}</div> */}
         {/* <div className="name"><h3>{eachProduct?.name}</h3></div> <br />
           <div className="price">price: {eachProduct?.price}</div>
           
       
          <div className="description">description : {eachProduct?.description}</div>  */}
 
-     
-     
-                                                 
 
-         
-  
-     
 
-   
-    
 
-    
-     
-       <ToastContainer />
-       </Stack>
-     </>
-    );
-  }
-  
-  export default Products;
+
+
+
+
+
+
+
+
+
+
+        <ToastContainer />
+      </Stack>
+    </>
+  );
+}
+
+export default Products;
